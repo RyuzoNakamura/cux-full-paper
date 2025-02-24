@@ -1,0 +1,175 @@
+\documentclass{cuxarticle}
+\begin{document}
+% タイトル
+\begin{titlepage}
+  \include{title}
+\end{titlepage}
+% アブスト
+\include{abstract}
+% 目次
+\tableofcontents
+
+\chapter{序論}
+
+\section{研究背景}
+我々は生活環境において、人間、動植物、モノなどの多様な「他者」と共存している。他者はそれぞれ独自の感覚や基準で世界を認識しており、我々がそれを直接知ることはできない。近年、脱人間中心デザインの観点から、他者理解の重要性が指摘されている。しかしながら、他者の感覚や基準を共有することは難しく、生活環境における継続的な他者理解を支援する手法は十分に確立されていない。
+
+\section{関連研究}
+他者視点の表現に関する取り組みとしては、以下のような事例がある：
+
+\subsection{In the Eyes of the Animal}
+In the Eyes of the Animal\cite{--EyesAnimal}は、VRを用いて動物の環世界を体験する試みである。ユーザーは没入型のVR環境で、動物の視覚特性を模した世界を体験することができる。
+
+\subsection{rapotosis}
+rapotosis\cite{--ソンヨン}は、Webサービスと連携して、服を「他者」として表現するシステムである。衣服の状態をセンシングし、その情報をWeb上で可視化する。
+
+これらの事例は革新的な試みであるが、以下の課題が存在する：
+\begin{itemize}
+  \item 一時的な体験に留まる
+  \item 生活環境から切り離された体験となっている
+  \item 特定の対象の表現に限定される
+\end{itemize}
+
+\section{研究目的}
+本研究では、生活空間における他者の環境評価を表現するロボットシステムを提案する。センサーで取得した環境データを他者基準で評価し、その評価結果をロボットの身体的動作を通じて表現する。生活空間にロボットを分散配置することで、継続的に他者を表現し続けることを目指す。
+
+\chapter{提案システム}
+
+\section{システム要件}
+本システムの要件として、以下の3点を設定した：
+
+\begin{enumerate}
+  \item 生活環境で継続的に他者の環境評価を表現できること
+  \item 多様な他者を表現できること
+  \item 特別な操作なしでの自然な他者理解を支援できること
+\end{enumerate}
+
+\section{システム構成}
+本システムは以下の要素から構成される：
+
+\subsection{ハードウェア構成}
+\begin{itemize}
+  \item センサー：M5StickC\cite{--M5StickC} (M5Stack社)
+  \item ロボット：toio\cite{--小さなキ} (SONY社)
+\end{itemize}
+
+\subsection{ソフトウェア構成}
+システムは以下のモジュールで構成される：
+
+\begin{enumerate}
+  \item センシングシステム
+    \begin{itemize}
+      \item 環境データの取得
+      \item センサー情報の整形
+    \end{itemize}
+
+  \item 評価システム
+    \begin{itemize}
+      \item 環境データと最適条件の差分を評価
+      \item 評価スコアの生成
+    \end{itemize}
+
+  \item アクション決定システム
+    \begin{itemize}
+      \item 評価結果に基づく動作パターンの決定
+      \item ロボットへの動作命令生成
+    \end{itemize}
+\end{enumerate}
+
+\chapter{実装と評価}
+
+\section{実装事例}
+以下の4種の他者について実装を行った：
+
+\subsection{人間}\cite{JianZhuWuHuanJingWeiShengGuanLiJiZhunnituite|HouShengLaoDongSheng}
+\begin{itemize}
+  \item 評価対象：気温（18-28℃）
+  \item 動作パターン：
+    \begin{itemize}
+      \item 快適時：アピールなし
+      \item 不快時（暑い/寒い）：激しい動作
+    \end{itemize}
+\end{itemize}
+
+\subsection{猫}\cite{stellaEnvironmentalAspectsDomestic2016}
+\begin{itemize}
+  \item 評価対象：気温（30-38℃）
+  \item 動作パターン：
+    \begin{itemize}
+      \item 快適時：定点での回転
+      \item 不快時：ランダムな往復動作
+    \end{itemize}
+\end{itemize}
+
+\subsection{バナナ}\cite{--バナナの}
+\begin{itemize}
+  \item 評価対象：
+    \begin{itemize}
+      \item 気温：14-20℃
+      \item 相対湿度：45-85\%
+    \end{itemize}
+  \item 動作パターン：3段階の状態表現
+\end{itemize}
+
+\subsection{衣服}\cite{--クローゼ}
+\begin{itemize}
+  \item 評価対象：相対湿度（65\%以下）
+  \item 動作パターン：
+    \begin{itemize}
+      \item 快適時：じっとする
+      \item 不快時：不規則な動作と音によるアピール
+    \end{itemize}
+\end{itemize}
+
+\section{評価結果}
+実装したシステムの動作検証により、以下の3点の課題が明らかになった：
+
+\begin{enumerate}
+  \item 最適な環境の基準には個人差がある
+    \begin{itemize}
+      \item 対応策：リアルタイムに基準を調整可能なインタフェースの実装
+    \end{itemize}
+
+  \item 移動する他者はセンシング位置と他者の位置が一致しない
+    \begin{itemize}
+      \item 対応策：空間的な変化が小さい環境データを中心に評価
+    \end{itemize}
+
+  \item 時間経過で最適条件が変化する他者は、即時的な評価では表現しきることができない
+    \begin{itemize}
+      \item 対応策：環境データの長期記録と分析、それに伴う評価基準の調整
+    \end{itemize}
+\end{enumerate}
+
+\chapter{結論と展望}
+
+\section{結論}
+本研究では、生活環境における他者の環境評価を表現するロボットシステムを提案・実装した。センサーによる環境データの取得、他者基準での評価、ロボットによる動作表現を組み合わせることで、継続的な他者理解の支援を可能とした。
+
+\section{今後の展望}
+今後の展開として、以下の点について研究を進める：
+
+\begin{itemize}
+  \item ロボット間の協調動作の実装による表現力の向上
+  \item センシング手法の改善による評価精度の向上
+  \item 異なるハードウェアによる新たな体験の創出
+\end{itemize}
+
+\chapteraddtoc{謝辞}
+本稿の執筆および研究にあたって，ご指導いただいた佐藤弘樹先生に深く感謝いたします．
+
+\vspace{3\zh}
+\begin{flushright}
+  2024年3月9日 \\
+  宮城大学 事業構想学群 価値創造デザイン学類 \\
+  感性情報デザインコース \\
+  中村龍造
+\end{flushright}
+
+\newpage
+\renewcommand{\refname}{\huge 参考文献}
+\bibliographystyle{junsrt}
+\bibliography{ref}
+\addcontentsline{toc}{chapter}{参考文献}
+
+\end{document}
