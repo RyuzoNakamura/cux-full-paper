@@ -152,12 +152,30 @@ HERMITS\cite{--HERMITSProceedings33rdAnnual}は，1つの自走式ロボット�
 
 評価システムは他者とそれが評価する環境データのパターンごとに，個別の実装が必要である．
 
+評価システムの構成図を図\ref{fig:evaluation-system}に示す。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[keepaspectratio, width=0.6\textwidth]{resources/evaluation-system.png}
+  \caption[short]{評価システムの構成図}
+  \label{fig:evaluation-system}
+\end{figure}
+
 \subsubsection{アクション決定システム}
 アクション決定システムは，評価システムから受け取ったスコアに基づいて，他者の状態を表現するための適切なアクションを決定する．
 
 アクション決定システムは他者のパターンごとに実装されたアクションデータを参照し，スコアに応じたアクションを選択する．アクションデータは，モーター制御命令のキュー，音声出力命令のキュー，LED制御命令のキュー，次の動作命令までの時間，アクション全体の完了に必要な時間などの要素を含むAction構造体として管理される．アクションデータはActionLibraryによって管理され，再利用可能なアクションパターンを提供する．
 
 アクション決定システムも評価システム同様，他者および対象となる環境データごとに異なるアクションパターンを実装する必要がある．
+
+アクション決定システムの構成図を図\ref{fig:action-decision-system}に示す。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[keepaspectratio, width=0.6\textwidth]{resources/action-decision-system.png}
+  \caption[short]{アクション決定システムの構成図}
+  \label{fig:action-decision-system}
+\end{figure}
 
 \subsubsection{ロボット制御システム}
 ロボット制御システムは，アクション決定システムから受け取ったアクション命令をtoioに適切に送信し，実行を管理する．
