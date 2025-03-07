@@ -28,7 +28,6 @@
 ]{geometry} % 余白設定
 \RequirePackage{setspace} % 行間調整
 \RequirePackage[hidelinks]{hyperref} % ハイパーリンク
-% \RequirePackage{tocloft}  % 目次のカスタマイズ用パッケージ
 \RequirePackage{titlesec}  % 章や節のスタイル設定用パッケージ
 \RequirePackage{titleps} % ヘッダー・フッターカスタマイズ
 
@@ -87,16 +86,6 @@
 % 目次のスタイル
 % ------------------------------
 \renewcommand{\contentsname}{{\normalfont\fontsize{14pt}{16.8pt}\selectfont\mcfamily 目次}}
-% \renewcommand{\cftchapfont}{\normalfont}      % 章タイトルを通常の太さに
-% \renewcommand{\cftchappagefont}{\normalfont}  % ページ番号も通常の太さに
-% 目次でのチャプター番号と題名の間隔を調整
-% \setlength{\cftchapnumwidth}{4em}  % tocloftを使うと「第○章」と章題が被るので調整
-
-% 目次タイトルのスタイルと間隔の設定
-
-% \setlength{\cftbeforetoctitleskip}{0pt}     % 目次タイトル前の余白
-% \setlength{\cftaftertoctitleskip}{10pt}     % 目次タイトル後の余白
-
 \setcounter{tocdepth}{3}                    % subsubsectionまで表示
 
 % ------------------------------
