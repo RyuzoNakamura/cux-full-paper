@@ -110,6 +110,4 @@
 % フォント設定
 % ------------------------------
 \setmainfont{Times-New-Roman}
-\setmainjfont[
-BoldFont = MS-Gothic
-]{MS-Mincho}
+\setmainjfont[BoldFont = MS-Gothic]{MS-Mincho}
